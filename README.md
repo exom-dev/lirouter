@@ -236,7 +236,7 @@ Lirouter supports routes with the following wildcards:
 * /\* - anything
 * /\*text - anything ending with _text_
 * /text\* - anything starting with _text_
-* /:param - anything, stores the subroute as a parameter
+* /:param - anything, stores the subroute as a parameter (see below _Route Wildcard Examples_)
 
 #### Examples
 
@@ -293,8 +293,8 @@ Lirouter supports routes with the following wildcards:
 
 ```
 /path/:param1/foo/:param2 will match:
-- /path/hello/foo/world (sets the `params` object to `{param1: hello, param2: world}`)
-- /path/foo/foo/bar (sets the `params` object to `{param1: foo, param2: bar}`)
+- /path/hello/foo/world (sets the params object to { param1: hello, param2: world })
+- /path/foo/foo/bar (sets the params object to { param1: foo, param2: bar })
 
 /path/:param1/foo/:param2 will not match:
 - /path/hello/bar/world
