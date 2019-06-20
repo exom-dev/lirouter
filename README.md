@@ -221,6 +221,8 @@ let section = new Section("element_id", "/root/goes/here");
 
 To add a route to a section, use the `route` method.
 
+>All routes, except for the "*" wildcard, must start with `/`.
+
 ```js
 section.route("route/goes/here", (container, params) => {
   // container - the HTML element of this section.
