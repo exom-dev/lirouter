@@ -24,13 +24,17 @@ This is a guide on how to get started with _lirouter_. For proper documentation,
 
 ## index.html
 
-First, create an HTML file and import the _lirouter_ script. Make sure it is imported with `type="module`.
+First, create an HTML file and import the _lirouter_ script.
+
+>Make sure it is imported with `type="module`.
 
 ```html
 <script type="module" src="scripts/lirouter.js"></script>
 ```
 
-Next, create a script (usually called _routes.js_) and import it after _lirouter.js_. Make sure it is also imported with `type="module`.
+Next, create a script (usually called _routes.js_) and import it after _lirouter.js_.
+
+>Make sure it is also imported with `type="module`.
 
 ```html
 <script type="module" src="scripts/lirouter.js"></script>
@@ -79,7 +83,7 @@ import { Section, addNavigator } from "./lirouter.js";
 
 Create a new section.
 
-A section is an element that changes its contents based on the route.
+>A section is an element that changes its contents based on the route.
 
 ```js
 let content = new Section("contentDiv");
@@ -147,7 +151,7 @@ addNavigator("contact", "/contact");
 
 In order for your SPA to work as expected, your server should replace all missing files with `index.html`.
 
-In other words, every request should be routed to `index.html`.
+>In other words, every request should be routed to `index.html`.
 
 ### Local development
 
@@ -167,14 +171,173 @@ live-server --port=3000 --entry-file="index.html"
 
 You can choose any port, but I'll stick with `3000`.
 
-The `--entry-file` argument is important, as it tells the server to replace all missing files with `index.html`.
+>The `--entry-file` argument is important, as it tells the server to replace all missing files with `index.html`.
 
 The local server should work now.
 
 ### Hosting
 
-If you want to host your SPA, you should choose a hosting service that supports SPAs, or supports replacing all missing files with a single file.
+If you want to host your SPA, you should choose a hosting service that supports SPAs.
 
 I recommend GitHub Pages. Though it doesn't officially support SPAs, you can still make it work with them.
 
-[Here](https://github.com/rafrex/spa-github-pages) is a guide for SPA GitHub Pages.
+>[Here](https://github.com/rafrex/spa-github-pages) is a guide for SPA GitHub Pages.
+
+# Documentation
+
+Lirouter is made up of 3 things. Sections, routes and navigators.
+
+## Sections
+
+A section is an HTML element that changes its content based on the route. You can have multiple sections at the same time.
+
+To initialize a new section, use the constructor of the class.
+
+```js
+let section = new Section("element_id");
+```
+
+A section can have a `root`. Say, for example, you create a section that has the following routes:
+
+*/work/project/web
+*/work/projects/desktop
+*/work/projects/mobile
+
+You can set the `root` of the Section to `/work/projects`, and the routes to:
+
+*/web
+*/desktop
+*/mobile
+
+To set the `root` of a section, use the second argument of the constructor.
+
+> Make sure the root does not end with `/`
+
+```js
+let section = new Section("element_id", "/root/goes/here");
+```
+
+## Routes
+
+To add a route to a section, use the `route` method.
+
+```js
+section.route("route/goes/here", (container, params) => {
+  // container - the HTML element of this section.
+  // params - the route parameters.
+});
+```
+
+### Wildcards
+
+Lirouter supports routes with the following wildcards:
+
+* * - any route (this should be added last)
+* /* - anything
+* /*text - anything ending with _text_
+* /text* - anything starting with _text_
+* /:param - anything, stores the subroute as a parameter
+
+#### Examples
+
+```
+* will match anything
+```
+
+```
+/* will match:
+- /12345
+- /hello
+- /foo
+
+/* will not match:
+- /
+- /1234/5678
+- /hello/world
+- /foo/bar
+```
+
+```
+/path/* will match:
+- /path/1234
+- /path/foo
+- /path/hello
+
+/path/* will not match:
+- /path
+- /path/1234/5678
+- /path/foo/bar
+- /path/hello/world
+```
+
+```
+/path/*/something will match:
+- /path/12345/something
+- /path/foo/something
+- /path/hello/something
+
+/path/*/something will not match:
+-/path/12345
+-/path/foo/something/bar
+```
+
+```
+/path/*st/t* will match:
+- /path/best/thing
+- /path/fast/test
+
+/path/*st/t* will not match:
+- /path/best/foo
+- /path/bar/test
+```
+
+```
+/path/:param1/foo/:param2 will match:
+- /path/hello/foo/world (sets the `params` object to `{param1: hello, param2: world}`)
+- /path/foo/foo/bar (sets the `params` object to `{param1: foo, param2: bar}`)
+
+/path/:param1/foo/:param2 will not match:
+- /path/hello/bar/world
+- /p/foo/foo/bar
+```
+
+## Section Activation
+
+In order for a section to work as expected, you need to activate it.
+
+Only active sections will change their contents based on the route.
+
+>Always activate a section only after adding the routes.
+
+```js
+section.activate();
+```
+
+You can also deactivate a section.
+
+>You can re-activate it later by using activate().
+
+```js
+section.deactivate();
+```
+
+## Navigators
+
+A navigator is an HTML element that can trigger the `navigate` function.
+
+>In other words, a navigator changes the path and causes active sections to re-render.
+>Always use navigators and the `navigate` function instead of `href`.
+
+```js
+addNavigator("element_id", "/path/to/navigate/on/click");
+```
+
+A navigator can also append to the path.
+
+>Notice that the first character of the path is not `/`.
+
+```js
+addNavigator("element_id", "path/to/nagivate/on/click");
+```
+
+
