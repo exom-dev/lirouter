@@ -20,7 +20,7 @@ Lirouter was created by [UnexomWid](http://unexomwid.me). It is licensed under t
 
 # Getting started
 
-This is a guide on how to get started with _lirouter_. For proper documentation, see below _Documentation_.
+This is a guide on how to get started with _lirouter_. For the documentation, see below _Documentation_.
 
 ## index.html
 
@@ -29,7 +29,7 @@ First, create an HTML file and import the _lirouter_ script.
 >Make sure it is imported with `type="module`.
 
 ```html
-<script type="module" src="scripts/lirouter.js"></script>
+<script type="module" src="/scripts/lirouter.js"></script>
 ```
 
 Next, create a script (usually called _routes.js_) and import it after _lirouter.js_.
@@ -37,8 +37,8 @@ Next, create a script (usually called _routes.js_) and import it after _lirouter
 >Make sure it is also imported with `type="module`.
 
 ```html
-<script type="module" src="scripts/lirouter.js"></script>
-<script type="module" src="scripts/routes.js"></script>
+<script type="module" src="/scripts/lirouter.js"></script>
+<script type="module" src="/scripts/routes.js"></script>
 ```
 
 Now, add some buttons with unique IDs.
@@ -49,7 +49,7 @@ Now, add some buttons with unique IDs.
 <button id="contact">Contact</button>
 ```
 
-Finally, add a container which will change its content based on the route.
+Finally, add a container.
 
 ```html
 <div id="contentDiv"></div>
@@ -75,76 +75,66 @@ The file should look like this:
 
 ## routes.js
 
-Import `Section` and `addNavigator` from _lirouter.js_.
+Import `route`, `render` and `navigate` from _lirouter.js_.
 
 ```js
-import { Section, addNavigator } from "./lirouter.js";
+import { route, render, navigate } from "./lirouter.js";
 ```
 
-Create a new section.
-
->A section is an element that changes its contents based on the route.
+Add routes to your liking. Let's stick with just a few for now.
 
 ```js
-let content = new Section("contentDiv");
-```
-
-Now, add routes to your liking. Let's stick with just a few for now.
-
-```js
-content.route("/", container => {
-  container.innerHTML = "<h1>This is the root path.</h1>";
+route("/", container => {
+  document.getElementById("contentDiv").innerHTML = "<h1>This is the root path.</h1>";
 });
-content.route("/about", container => {
-  container.innerHTML = "<h1>hello</h1>";
+route("/about", container => {
+  document.getElementById("contentDiv").innerHTML = "<h1>about</h1>";
 });
-content.route("/contact", container => {
-  container.innerHTML = "<h1>world</h1>";
+route("/contact", container => {
+  document.getElementById("contentDiv").innerHTML = "<h1>contact</h1>";
 });
-content.route("*", container => {
-  container.innerHTML = "<h1>There is no route for this. 404</h1>";
+route("*", container => {
+  document.getElementById("contentDiv").innerHTML = "<h1>There is no route for this. 404</h1>";
 });
 ```
 
-After adding the routes, activate the section;
+Now, render the page.
 
 ```js
-content.activate();
+render();
 ```
 
 Finally, add events to the buttons that you previously created.
 
 ```js
-addNavigator("home", "/");
-addNavigator("about", "/about");
-addNavigator("contact", "/contact");
+document.getElementById("home").addEventListener("click", () => navigate("/"));
+document.getElementById("about").addEventListener("click", () => navigate("/about"));
+document.getElementById("contact").addEventListener("click", () => navigate("/contact"));
 ```
 
 The file should look like this:
 
 ```js
-import { Section, addNavigator } from "./lirouter.js";
+import { route, render, navigate } from "./lirouter.js";
 
-let content = new Section("contentDiv");
-
-content.route("/", container => {
-  container.innerHTML = "<h1>This is the root path.</h1>";
+route("/", params => {
+  document.getElementById("contentDiv").innerHTML = "<h1>This is the root path.</h1>";
 });
-content.route("/about", container => {
-  container.innerHTML = "<h1>hello</h1>";
+route("/about", params => {
+  document.getElementById("contentDiv").innerHTML = "<h1>about</h1>";
 });
-content.route("/contact", container => {
-  container.innerHTML = "<h1>world</h1>";
+route("/contact", params => {
+  document.getElementById("contentDiv").innerHTML = "<h1>contact</h1>";
 });
-content.route("*", container => {
-  container.innerHTML = "<h1>There is no route for this. 404</h1>";
+route("*", params => {
+  document.getElementById("contentDiv").innerHTML = "<h1>There is no route for this. 404</h1>";
 });
 
-content.activate();
+render();
 
-addNavigator("home", "/");
-addNavigator("about", "/about");
-addNavigator("contact", "/contact");
+document.getElementById("home").addEventListener("click", () => navigate("/"));
+document.getElementById("about").addEventListener("click", () => navigate("/about"));
+document.getElementById("contact").addEventListener("click", () => navigate("/contact"));
 ```
 
 ## Setting up the server
@@ -185,47 +175,25 @@ I recommend GitHub Pages. Though it doesn't officially support SPAs, you can sti
 
 # Documentation
 
-Lirouter is made up of 3 things: sections, routes and navigators.
+Lirouter contains 3 important functions:
 
-## Sections
+* *route*: adds a new route
+* *render*: renders the page by using the current path
+* *navigate*: navigates to another path
 
-A section is an HTML element that changes its content based on the route. You can have multiple sections at the same time.
-
-To initialize a new section, use the constructor of the class.
-
-```js
-let section = new Section("element_id");
-```
-
-A section can have a `root`. Say, for example, you create a section that has the following routes:
-
-* /work/project/web
-* /work/projects/desktop
-* /work/projects/mobile
-
-You can set the `root` of the Section to `/work/projects`, and the routes to:
-
-* /web
-* /desktop
-* /mobile
-
-To set the `root` of a section, use the second argument of the constructor.
-
-> Make sure the root does not end with `/`
-
-```js
-let section = new Section("element_id", "/root/goes/here");
-```
+>You must manually call the `render` function, once, after adding all the routes.
+>If you don't, the page won't render when it's first loaded.
+>
+>After that, the `navigate` renders the page automatically.
 
 ## Routes
 
-To add a route to a section, use the `route` method.
+To add a route, use the `route` method.
 
 >All routes, except for the "*" wildcard, must start with `/`.
 
 ```js
-section.route("route/goes/here", (container, params) => {
-  // container - the HTML element of this section.
+route("route/goes/here", (params) => {
   // params - the route parameters (see below the /:param wildcard).
 });
 ```
@@ -240,7 +208,7 @@ Lirouter supports routes with the following wildcards:
 * /text\* - anything starting with _text_
 * /:param - anything, stores the subroute as a parameter (see below _Examples_)
 
-#### Examples
+### Examples
 
 ```
 * will match anything
@@ -252,7 +220,7 @@ Lirouter supports routes with the following wildcards:
 - /hello
 - /foo
 
-/* will not match:
+but not:
 - /
 - /1234/5678
 - /hello/world
@@ -265,7 +233,7 @@ Lirouter supports routes with the following wildcards:
 - /path/foo
 - /path/hello
 
-/path/* will not match:
+but not:
 - /path
 - /path/1234/5678
 - /path/foo/bar
@@ -278,7 +246,7 @@ Lirouter supports routes with the following wildcards:
 - /path/foo/something
 - /path/hello/something
 
-/path/*/something will not match:
+but not:
 -/path/12345
 -/path/foo/something/bar
 ```
@@ -288,7 +256,7 @@ Lirouter supports routes with the following wildcards:
 - /path/best/thing
 - /path/fast/test
 
-/path/*st/t* will not match:
+but not:
 - /path/best/foo
 - /path/bar/test
 ```
@@ -298,57 +266,27 @@ Lirouter supports routes with the following wildcards:
 - /path/hello/foo/world (sets the params object to { param1: "hello", param2: "world" })
 - /path/foo/foo/bar (sets the params object to { param1: "foo", param2: "bar" })
 
-/path/:param1/foo/:param2 will not match:
+but not:
 - /path/hello/bar/world
 - /p/foo/foo/bar
 ```
 
-## Section Activation
+## Navigation
 
-In order for a section to work as expected, you need to activate it.
+You can navigate through your page with the `navigate` function.
 
-Only active sections will change their contents based on the route.
-
->Always activate a section only after adding the routes.
-
-```js
-section.activate();
-```
-
-You can also deactivate a section.
-
->You can re-activate it later by using activate().
-
-```js
-section.deactivate();
-```
-
-## Navigators
-
-A navigator is an HTML element that can trigger the `navigate` function.
-
->In other words, a navigator changes the path and causes active sections to re-render.
->If you navigate to the current path (eg. from /about to /about), the sections will not re-render.
+>Always use the `navigate` function instead of `href` when navigating through your page.
 >
->Always use navigators and the `navigate` function instead of `href` when navigating through your page.
+>If you navigate to the current path (_eg. from /about to /about_), the page will not re-render.
 
 ```js
-addNavigator("element_id", "/path/to/navigate/on/click");
+navigate("/path/to/navigate");
 ```
 
-A navigator can also append to the path.
+You can also navigate to a relative path.
 
 >Notice that the first character of the path is not `/`.
 
 ```js
-addNavigator("element_id", "path/to/nagivate/on/click");
+navigate("path/to/navigate");
 ```
-
-You can directly use the `navigate` function if you want more control.
-
-```js
-import { navigate } from "./lirouter.js"
-
-navigate("path/goes/here");
-```
-

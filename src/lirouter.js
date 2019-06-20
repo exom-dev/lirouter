@@ -18,74 +18,40 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-/** 
- * Contains all the active sections.
- */
-let sections = [];
-
 /**
  * Contains the last path that was rendered.
  */
 let lastPath = "";
 
 /**
- * Represents a section.
+ * Contains the routes.
  */
-class Section {
-  /** 
-   * Initializes a new instance of the Section class.
-   */
-  constructor(containerId, root) {
-    this.containerId = containerId;
-    this.root = root !== undefined ? root : "";
-    this.routes = [];
-  }
+let routes = [];
 
-  /**
-   * Defines a new route for this section.
-   * 
-   * @param {string} path The path of the route.
-   * @param {function} render The render method of the route.
-   */
-  route(path, render) {
-    this.routes.push({ path: path, render: render });
-  }
+/**
+  * Defines a new route.
+  * 
+  * @param {string} path The path of the route.
+  * @param {function} render The render method of the route.
+  */
+function route(path, render) {
+  routes.push({ path: path, render: render });
+}
 
-  /**
-   * Activates this section if it isn't already active.
-   */
-  activate() {
-    if (sections.indexOf(this) === -1)
-        sections.push(this);
+/**
+ * Renders the page at the current path.
+ */
+function render() {
+  if(lastPath !== window.location.pathname) {
+    lastPath = window.location.pathname;
 
-    this.render(window.location.pathname);
-  }
-
-  /**
-   * Deactivates this section if it is active.
-   */
-  deactivate() {
-    let index = sections.indexOf(this);
-    if (index > -1)
-        sections.slice(index, 1);
-  }
-
-  /**
-   * Renders the section. All routes will be checked, in order, until one matches.
-   * 
-   * @param {string} path The path to render.
-   */
-  render(path) {
-    for (let u = 0; u < this.routes.length; ++u) {
-      let route_match = match(path, this.root + this.routes[u].path);
+    for (let u = 0; u < routes.length; ++u) {
+      let route_match = match(window.location.pathname, routes[u].path);
 
       if (route_match === undefined)
         continue;
 
-      this.routes[u].render(
-        document.getElementById(this.containerId),
-        route_match.params
-      );
+      routes[u].render(route_match.params);
       return;
     }
   }
@@ -97,38 +63,15 @@ class Section {
  * @param {string} path The path to navigate to.
  */
 function navigate(path) {
-    window.history.pushState(
-        {},
-        "",
-        (path.startsWith("/")
-        ? window.location.origin + path
-        : window.location.href + (window.location.href.endsWith("/") ? "" : "/") + path)
-    );
+  window.history.pushState(
+      {},
+      "",
+      (path.startsWith("/")
+      ? window.location.origin + path
+      : window.location.href + (window.location.href.endsWith("/") ? "" : "/") + path)
+  );
 
-    renderSections();
-}
-
-/**
- * Renders all active sections.
- * 
- * Every active section's 'render' method will be called.
- */
-function renderSections() {
-  if(lastPath !== window.location.pathname) {
-    for (let u = 0; u < sections.length; ++u)
-        sections[u].render(window.location.pathname);
-    lastPath = window.location.pathname;
-  }
-}
-
-/**
- * Adds an onClick event to an element for navigation purposes.
- * 
- * @param {string} id The ID of the element to add the event to.
- * @param {string} route The route to navigate to when the event is fired.
- */
-function addNavigator(id, route) {
-  document.getElementById(id).addEventListener("click", () => navigate(route));
+  render();
 }
 
 /**
@@ -194,10 +137,8 @@ function match(path, route) {
   return data;
 }
 
-// Renders the active sections when the back() event is fired.
-window.onpopstate = () => {
-  renderSections();
-}
+// Re-renders the page when the back() event is fired.
+window.onpopstate = render;
 
 // Exports the necessary stuff.
-export { Section, navigate, addNavigator };
+export { route, render, navigate };
