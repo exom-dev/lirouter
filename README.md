@@ -184,7 +184,7 @@ Lirouter contains 3 important functions:
 >You must manually call the `render` function, once, after adding all the routes.
 >If you don't, the page won't render when it's first loaded.
 >
->After that, the `navigate` renders the page automatically.
+>After that, the `navigate` function renders the page automatically.
 
 ## Routes
 
