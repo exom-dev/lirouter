@@ -185,7 +185,7 @@ I recommend GitHub Pages. Though it doesn't officially support SPAs, you can sti
 
 # Documentation
 
-Lirouter is made up of 3 things. Sections, routes and navigators.
+Lirouter is made up of 3 things: sections, routes and navigators.
 
 ## Sections
 
@@ -199,15 +199,15 @@ let section = new Section("element_id");
 
 A section can have a `root`. Say, for example, you create a section that has the following routes:
 
-*/work/project/web
-*/work/projects/desktop
-*/work/projects/mobile
+* /work/project/web
+* /work/projects/desktop
+* /work/projects/mobile
 
 You can set the `root` of the Section to `/work/projects`, and the routes to:
 
-*/web
-*/desktop
-*/mobile
+* /web
+* /desktop
+* /mobile
 
 To set the `root` of a section, use the second argument of the constructor.
 
@@ -232,10 +232,10 @@ section.route("route/goes/here", (container, params) => {
 
 Lirouter supports routes with the following wildcards:
 
-* * - any route (this should be added last)
-* /* - anything
-* /*text - anything ending with _text_
-* /text* - anything starting with _text_
+* \* - any route (this should be added last)
+* /\* - anything
+* /\*text - anything ending with _text_
+* /text\* - anything starting with _text_
 * /:param - anything, stores the subroute as a parameter
 
 #### Examples
