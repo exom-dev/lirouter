@@ -6,7 +6,7 @@
 
 _Lirouter_ is a lightweight JavaScript routing library used for building static Single Page Applications (SPA).
 
-The library has no dependencies.
+This library has no dependencies and was made to be light and fast.
 
 # License
 
@@ -293,8 +293,8 @@ Lirouter supports routes with the following wildcards:
 
 ```
 /path/:param1/foo/:param2 will match:
-- /path/hello/foo/world (sets the params object to { param1: hello, param2: world })
-- /path/foo/foo/bar (sets the params object to { param1: foo, param2: bar })
+- /path/hello/foo/world (sets the params object to { param1: "hello", param2: "world" })
+- /path/foo/foo/bar (sets the params object to { param1: "foo", param2: "bar" })
 
 /path/:param1/foo/:param2 will not match:
 - /path/hello/bar/world
@@ -326,7 +326,9 @@ section.deactivate();
 A navigator is an HTML element that can trigger the `navigate` function.
 
 >In other words, a navigator changes the path and causes active sections to re-render.
->Always use navigators and the `navigate` function instead of `href`.
+>If you navigate to the current path (eg. from /about to /about), the sections will not re-render.
+>
+>Always use navigators and the `navigate` function instead of `href` when navigating through your page.
 
 ```js
 addNavigator("element_id", "/path/to/navigate/on/click");
@@ -340,4 +342,11 @@ A navigator can also append to the path.
 addNavigator("element_id", "path/to/nagivate/on/click");
 ```
 
+You can directly use the `navigate` function if you want more control.
+
+```js
+import { navigate } from "./lirouter.js"
+
+navigate("path/goes/here");
+```
 
