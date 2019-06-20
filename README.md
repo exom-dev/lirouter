@@ -16,6 +16,7 @@ Lirouter was created by [UnexomWid](http://unexomwid.me). It is licensed under t
 
 > Note: versions with the suffix **R** are considered stable releases, while those with the suffix **D** are considered unstable.
 
+[v2.0R](https://github.com/UnexomWid/lirouter/releases/tag/v2.0R) - June 20, 2019
 [v1.0R](https://github.com/UnexomWid/lirouter/releases/tag/v1.0R) - June 20, 2019
 
 # Getting started
