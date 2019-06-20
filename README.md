@@ -193,7 +193,7 @@ To add a route, use the `route` method.
 >All routes, except for the "*" wildcard, must start with `/`.
 
 ```js
-route("route/goes/here", (params) => {
+route("/route/goes/here", (params) => {
   // params - the route parameters (see below the /:param wildcard).
 });
 ```
