@@ -224,7 +224,7 @@ To add a route to a section, use the `route` method.
 ```js
 section.route("route/goes/here", (container, params) => {
   // container - the HTML element of this section.
-  // params - the route parameters.
+  // params - the route parameters (see below the /:param wildcard).
 });
 ```
 
@@ -236,7 +236,7 @@ Lirouter supports routes with the following wildcards:
 * /\* - anything
 * /\*text - anything ending with _text_
 * /text\* - anything starting with _text_
-* /:param - anything, stores the subroute as a parameter (see below _Route Wildcard Examples_)
+* /:param - anything, stores the subroute as a parameter (see below _Examples_)
 
 #### Examples
 
