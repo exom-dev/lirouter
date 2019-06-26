@@ -84,16 +84,16 @@ import { route, render, navigate } from "./lirouter.js";
 Add routes to your liking. Let's stick with just a few for now.
 
 ```js
-route("/", container => {
+route("/", params => {
   document.getElementById("contentDiv").innerHTML = "<h1>This is the root path.</h1>";
 });
-route("/about", container => {
+route("/about", params => {
   document.getElementById("contentDiv").innerHTML = "<h1>about</h1>";
 });
-route("/contact", container => {
+route("/contact", params => {
   document.getElementById("contentDiv").innerHTML = "<h1>contact</h1>";
 });
-route("*", container => {
+route("*", params => {
   document.getElementById("contentDiv").innerHTML = "<h1>There is no route for this. 404</h1>";
 });
 ```
