@@ -63,6 +63,9 @@ function render() {
  * @param {string} path The path to navigate to.
  */
 function navigate(path) {
+  if(path.endsWith("/") || path.endsWith("\\"))
+    path = path.substring(0, path.length - 1);
+    
   window.history.pushState(
       {},
       "",
@@ -83,9 +86,6 @@ function navigate(path) {
  * @return {object} An object with a 'params' property, if the path matches the route. Otherwise, undefined.
  */
 function match(path, route) {
-  if(path.endsWith("/") || path.endsWith("\\"))
-    path = path.substring(0, path.length - 1);
-
   let data = { params: {} };
 
   // Equal, or the route is a wildcard.
