@@ -16,6 +16,8 @@ Lirouter was created by [UnexomWid](http://unexomwid.me). It is licensed under t
 
 > Note: versions with the suffix **R** are considered stable releases, while those with the suffix **D** are considered unstable.
 
+[v2.1R](https://github.com/UnexomWid/lirouter/releases/tag/v2.1R) - July 02, 2019
+[v2.0R](https://github.com/UnexomWid/lirouter/releases/tag/v2.0R) - June 20, 2019
 [v1.0R](https://github.com/UnexomWid/lirouter/releases/tag/v1.0R) - June 20, 2019
 
 # Getting started
@@ -60,8 +62,7 @@ The file should look like this:
 ```html
 <html>
   <head>
-    <script type="module" src="scripts/lirouter.js"></script>
-    <script type="module" src="scripts/routes.js"></script>
+    <title>Getting started</title>
   </head>
   <body>
     <button id="home">Home</button>
@@ -70,6 +71,8 @@ The file should look like this:
 
     <div id="contentDiv"></div>
   </body>
+  <script type="module" src="scripts/lirouter.js"></script>
+  <script type="module" src="scripts/routes.js"></script>
 </html>
 ```
 
