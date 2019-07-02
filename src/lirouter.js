@@ -35,7 +35,7 @@ let routes = [];
   * @param {function} render The render method of the route.
   */
 function route(path, render) {
-  routes.push({ path: path.endsWith("/") || path.endsWith("\\") ? path.substring(0, path.length - 1) : path, render: render });
+  routes.push({ path: path.length > 1 && (path.endsWith("/") || path.endsWith("\\")) ? path.substring(0, path.length - 1) : path, render: render });
 }
 
 /**
@@ -63,7 +63,7 @@ function render() {
  * @param {string} path The path to navigate to.
  */
 function navigate(path) {
-  if(path.endsWith("/") || path.endsWith("\\"))
+  if(path.length > 1 && (path.endsWith("/") || path.endsWith("\\")))
     path = path.substring(0, path.length - 1);
     
   window.history.pushState(
