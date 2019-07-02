@@ -42,6 +42,10 @@ function route(path, render) {
  * Renders the page at the current path.
  */
 function render() {
+  if(window.location.pathname.length > 1 && (window.location.pathname.endsWith("/") || window.location.pathname.endsWith("\\"))) {
+    navigate(window.location.pathname.substring(0, window.location.pathname.length - 1));
+    return;
+  }
   if(lastPath !== window.location.pathname) {
     lastPath = window.location.pathname;
 
