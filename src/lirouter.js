@@ -35,7 +35,7 @@ let routes = [];
   * @param {function} render The render method of the route.
   */
 function route(path, render) {
-  routes.push({ path: path, render: render });
+  routes.push({ path: path.endsWith("/") || path.endsWith("\\") ? path.substring(0, path.length - 1) : path, render: render });
 }
 
 /**
@@ -83,6 +83,9 @@ function navigate(path) {
  * @return {object} An object with a 'params' property, if the path matches the route. Otherwise, undefined.
  */
 function match(path, route) {
+  if(path.endsWith("/") || path.endsWith("\\"))
+    path = path.substring(0, path.length - 1);
+
   let data = { params: {} };
 
   // Equal, or the route is a wildcard.
