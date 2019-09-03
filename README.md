@@ -2,13 +2,13 @@
   <img src="img/logo.png" alt="lirouter">
 </p>
 
-# About
+# About <a href="https://www.ecma-international.org/publications/standards/Ecma-006.htm"><img align="right" src="https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript" alt="JavaScript ES6" /></a>
 
 _Lirouter_ is a lightweight JavaScript routing library used for building static Single Page Applications (SPA).
 
 This library has no dependencies and was made to be light and fast.
 
-# License
+# License <a href="https://github.com/UnexomWid/lirouter/blob/master/LICENSE"><img align="right" src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3" /></a>
 
 Lirouter was created by [UnexomWid](http://unexomwid.me). It is licensed under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) license.
 
