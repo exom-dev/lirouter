@@ -8,9 +8,9 @@ _Lirouter_ is a lightweight JavaScript routing library used for building static 
 
 This library has no dependencies and was made to be light and fast.
 
-# License <a href="https://github.com/UnexomWid/lirouter/blob/master/LICENSE"><img align="right" src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3" /></a>
+# License <a href="https://github.com/UnexomWid/lirouter/blob/master/LICENSE"><img align="right" src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" /></a>
 
-Lirouter was created by [UnexomWid](http://unexomwid.me). It is licensed under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) license.
+Lirouter was created by [UnexomWid](https://uw.exom.dev). It is licensed under the [MIT](https://github.com/UnexomWid/lirouter/blob/master/LICENSE) license.
 
 # Releases
 
