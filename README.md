@@ -142,15 +142,9 @@ document.getElementById("about").addEventListener("click", () => navigate("/abou
 document.getElementById("contact").addEventListener("click", () => navigate("/contact"));
 ```
 
-## Setting up the server
+## Local development
 
-In order for your SPA to work as expected, your server should replace all missing files with `index.html`.
-
->In other words, every request should be routed to `index.html`.
-
-### Local development
-
-If you want to develop an application locally, you'll need something like [live-server](https://www.npmjs.com/package/live-server).
+You'll need something like [live-server](https://www.npmjs.com/package/live-server).
 
 Make sure you have [Node.js](https://nodejs.org/en/) installed. Then, install [live-server](https://www.npmjs.com/package/live-server).
 
@@ -164,19 +158,11 @@ Next, go to the folder that contains your project, and open the server.
 live-server --port=3000 --entry-file="index.html"
 ```
 
-You can choose any port, but I'll stick with `3000`.
+You can choose any port, such as `3000`.
 
 >The `--entry-file` argument is important, as it tells the server to replace all missing files with `index.html`.
 
 The local server should work now.
-
-### Hosting
-
-If you want to host your SPA, you should choose a hosting service that supports SPAs.
-
-I recommend GitHub Pages. Though it doesn't officially support SPAs, you can still make it work with them.
-
->[Here](https://github.com/rafrex/spa-github-pages) is a guide for SPA GitHub Pages.
 
 # Documentation
 
