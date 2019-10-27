@@ -1,5 +1,5 @@
 /**
- * lirouter (https://github.com/UnexomWid/timerh)
+ * lirouter (https://github.com/UnexomWid/lirouter)
  *
  * This project is licensed under the MIT license.
  * Copyright (c) 2019 UnexomWid (https://uw.exom.dev)
