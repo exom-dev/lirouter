@@ -8,20 +8,6 @@ _Lirouter_ is a lightweight JavaScript routing library used for building static 
 
 This library has no dependencies and was made to be light and fast.
 
-# License <a href="https://github.com/UnexomWid/lirouter/blob/master/LICENSE"><img align="right" src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" /></a>
-
-Lirouter was created by [UnexomWid](https://uw.exom.dev). It is licensed under the [MIT](https://github.com/UnexomWid/lirouter/blob/master/LICENSE) license.
-
-# Releases
-
-> Note: versions with the suffix **R** are considered stable releases, while those with the suffix **D** are considered unstable.
-
-[v2.1R](https://github.com/UnexomWid/lirouter/releases/tag/v2.1R) - July 02, 2019
-
-[v2.0R](https://github.com/UnexomWid/lirouter/releases/tag/v2.0R) - June 20, 2019
-
-[v1.0R](https://github.com/UnexomWid/lirouter/releases/tag/v1.0R) - June 20, 2019
-
 # Getting started
 
 This is a guide on how to get started with _lirouter_. For the documentation, see below _Documentation_.
@@ -281,3 +267,17 @@ You can also navigate to a relative path.
 ```js
 navigate("path/to/navigate");
 ```
+
+# Releases
+
+> Note: versions with the suffix **R** are considered stable releases, while those with the suffix **D** are considered unstable.
+
+[v2.1R](https://github.com/exom-dev/lirouter/releases/tag/v2.1R) - July 02, 2019
+
+[v2.0R](https://github.com/exom-dev/lirouter/releases/tag/v2.0R) - June 20, 2019
+
+[v1.0R](https://github.com/exom-dev/lirouter/releases/tag/v1.0R) - June 20, 2019
+
+# License <a href="https://github.com/exom-dev/lirouter/blob/master/LICENSE"><img align="right" src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" /></a>
+
+Lirouter was created by [The Exom Developers](https://github.com/exom-dev). It is licensed under the [MIT](https://github.com/exom-dev/lirouter/blob/master/LICENSE) license.
