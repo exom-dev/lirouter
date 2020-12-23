@@ -152,11 +152,12 @@ The local server should work now.
 
 # Documentation
 
-Lirouter contains 3 important functions:
+Lirouter contains 4 important functions:
 
 * *route*: adds a new route
 * *render*: renders the page by using the current path
 * *navigate*: navigates to another path
+* *option*: changes an option
 
 >You must manually call the `render` function, once, after adding all the routes.
 >If you don't, the page won't render when it's first loaded.
@@ -266,6 +267,30 @@ You can also navigate to a relative path.
 
 ```js
 navigate("path/to/navigate");
+```
+
+By default, `navigate` function will also update the URL. If you don't want the URL to change, you can `false` for the `updateUrl` parameter (by default, it's `true`).
+
+```js
+navigate("/path/to/navigate", false)
+```
+
+## Options
+
+You can set options by using the `option` function (don't forget to import it).
+
+```js
+option('key', 'value');
+```
+
+Currently, there is only one option:
+
+* **forceRedraw**: whether or not to redraw the page if the `navigate` function is called on the same path as the current one  (*default:* `false`)
+
+Here's an example:
+
+```js
+option('forceRedraw', true);
 ```
 
 # Releases
