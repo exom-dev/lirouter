@@ -255,7 +255,7 @@ You can navigate through your page with the `navigate` function.
 
 >Always use the `navigate` function instead of `href` when navigating through your page.
 >
->If you navigate to the current path (_eg. from /about to /about_), the page will not re-render.
+>If you navigate to the current path (_eg. from /about to /about_), the page will not re-render. If you want to override this behavior, use the `forceRedraw` option (see below).
 
 ```js
 navigate("/path/to/navigate");
@@ -285,7 +285,7 @@ option('key', 'value');
 
 Currently, there is only one option:
 
-* **forceRedraw**: whether or not to redraw the page if the `navigate` function is called on the same path as the current one  (*default:* `false`)
+* **forceRedraw**: whether or not to re-render the page even if the `navigate` function is called on the same path as the current one (*default:* `false`)
 
 Here's an example:
 
