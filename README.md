@@ -89,7 +89,7 @@ route("*", params => {
 });
 ```
 
-Now, render the page.
+Now, render the page when the document first loads.
 
 ```js
 render();
