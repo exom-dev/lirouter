@@ -280,6 +280,8 @@ navigate("/path/to/navigate", false)
 You can set options by using the `option` function (don't forget to import it).
 
 ```js
+import { route, render, navigate, option } from "./lirouter.js";
+
 option('key', 'value');
 ```
 
