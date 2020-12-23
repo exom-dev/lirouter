@@ -31,26 +31,36 @@ let lastPath = "";
 let routes = [];
 
 /**
+ * Contains various options.
+ */
+let opts = {};
+
+/**
   * Defines a new route.
   * 
   * @param {string} path The path of the route.
   * @param {function} render The render method of the route.
   */
 function route(path, render) {
-  routes.push({ path: path.length > 1 && (path.endsWith("/") || path.endsWith("\\")) ? path.substring(0, path.length - 1) : path, render: render });
+  routes.push({ path: (path.length > 1 && (path.endsWith("/") || path.endsWith("\\"))) ? (path.substring(0, path.length - 1)) : (path),
+                render: render });
 }
 
 /**
- * Renders the page at the current path.
+ * Renders the page at a path.
  */
-function render() {
-  if(window.location.pathname.length > 1 && (window.location.pathname.endsWith("/") || window.location.pathname.endsWith("\\")))
-    history.replaceState({}, "", window.location.pathname.substring(0,window.location.pathname.length-1));
-  if(lastPath !== window.location.pathname) {
-    lastPath = window.location.pathname;
+function render(path) {
+  if(!path)
+    path = window.location.pathname;
+
+  if(path.length > 1 && (path.endsWith("/") || path.endsWith("\\")))
+    path = path.substring(0, path.length - 1);
+
+  if(lastPath !== path || opts.forceRedraw) {
+    lastPath = path;
 
     for (let u = 0; u < routes.length; ++u) {
-      let route_match = match(window.location.pathname, routes[u].path);
+      let route_match = match(path, routes[u].path);
 
       if (route_match === undefined)
         continue;
@@ -65,18 +75,31 @@ function render() {
  * Navigates to a path.
  * 
  * @param {string} path The path to navigate to.
+ * @param {bool} updateUrl Whether or not to update the current URL.
  */
-function navigate(path) {
+function navigate(path, updateUrl = true) {
   if(path.length > 1 && (path.endsWith("/") || path.endsWith("\\")))
     path = path.substring(0, path.length - 1);
-    
-  window.history.pushState(
+
+  if(updateUrl) {
+    window.history.pushState(
       {},
       "",
       path
-  );
+    );
+  }
 
-  render();
+  render(path);
+}
+
+/**
+ * Changes an option.
+ * 
+ * @param {string} key The option name.
+ * @param {any} value The option value.
+ */
+function option(key, value) {
+  opts[key] = value;
 }
 
 /**
@@ -146,4 +169,4 @@ function match(path, route) {
 window.onpopstate = render;
 
 // Exports the necessary stuff.
-export { route, render, navigate };
+export { route, render, navigate, option };
