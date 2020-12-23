@@ -299,6 +299,8 @@ option('forceRedraw', true);
 
 > Note: versions with the suffix **R** are considered stable releases, while those with the suffix **D** are considered unstable.
 
+[v2.2R](https://github.com/exom-dev/lirouter/releases/tag/v2.2R) - December 23, 2020
+
 [v2.1R](https://github.com/exom-dev/lirouter/releases/tag/v2.1R) - July 02, 2019
 
 [v2.0R](https://github.com/exom-dev/lirouter/releases/tag/v2.0R) - June 20, 2019
